@@ -4,23 +4,33 @@ import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
+
+import static core.CustomConditions.ElementHasText;
+import static core.CustomConditions.texts;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by barocko on 9/13/2016.
  */
-public class GMailPages extends BasePage {
+public class GMailPage extends BasePage {
 
-    //public static List<WebElement> mails = driver.findElements(By.cssSelector("[role='main'] .zA"));
+    @FindBy(css = "[role=main] .zA")
+    public static List<WebElement> mails ;
 
-    public GMailPages(WebDriver driver) {
+    public GMailPage(WebDriver driver) {
         super(driver);
     }
+
     public  void send(String email, String subject) {
         $(driver, By.name("to")).sendKeys(email);
         $(driver, By.name("subjectbox")).sendKeys(subject);
-        $(driver, By.id(":lo")).click();
+        $(driver, By.name("Send")).click();
     }
 
     public  void login(String email,String password) {
@@ -52,10 +62,13 @@ public class GMailPages extends BasePage {
     public void goToInbox() {
         $(driver, byTitle("Inbox")).click();
     }
-   /*
-    public static void assertMail(int index,String mailText) {
-    assertTrue(driver.findElements(By.cssSelector("[role='main'] .zA")).get(index).contains(mailText));
+
+    public   void assertMail(int index,String mailText) {
+    assertThat(ElementHasText(mails, index, mailText));
     }
-    */
+
+    public void assertMails(String ... mailTexts) {
+    assertThat(texts(mails, mailTexts));
+    }
 
 }

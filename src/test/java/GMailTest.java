@@ -1,50 +1,47 @@
 import core.Configuration;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.GMailPages;
+import pages.GMailPage;
+
+import static data.TestData.mailLogin;
+import static data.TestData.mailPassword;
 
 
 /**
  * Created by barocko on 9/13/2016.
  */
-public class GMailTest extends TestData  {
+public class GMailTest extends BaseTest {
 
     private WebDriver driver = new FirefoxDriver();
 
-    GMailPages pages=new GMailPages(driver);
-
+    GMailPage page=new GMailPage(driver);
 
     @Before
     public void setUp() {
-        Configuration.timeout = 15;
+        Configuration.timeout = 20;
     }
-
-    @After
-    public void closeDriver() {
-        driver.quit();
-    }
-
 
     @Test
-    public void  testLoginSendReceiveAndSearch() {
+    public  void  testLoginSendReceiveAndSearch() {
         String emailSubject = "Hello,Ukraine " + System.currentTimeMillis();
 
-        pages.openApp();
-        pages.login(mailLogin,mailPassword);
+        page.openApp();
+        page.login(mailLogin,mailPassword);
 
-        pages.composeEmail();
-        pages.send(mailLogin, emailSubject);
+        page.composeEmail();
+        page.send(mailLogin, emailSubject);
 
-        pages.refresh();
+        page.refresh();
+        page.assertMail(0,emailSubject);
 
-        pages.goToSent();
+        page.goToSent();
+        page.assertMail(0,emailSubject);
 
-
-        pages.goToInbox();
-        pages.search(emailSubject);
+        page.goToInbox();
+        page.search(emailSubject);
+        page.assertMails(emailSubject);
 
     }
 }

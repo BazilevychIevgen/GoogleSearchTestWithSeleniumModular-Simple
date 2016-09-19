@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static core.BasePage.driver;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 /**
@@ -16,12 +17,12 @@ public abstract class ConciseAPI {
 
     public abstract WebDriver getWebDriver();
 
-    public <V> V assertThat( ExpectedCondition<V> condition) {
-        return (new WebDriverWait(getWebDriver(), 10)).until(condition);
+    public  <V> V assertThat( ExpectedCondition<V> condition) {
+        return assertThat(condition, Configuration.timeout);
     }
 
-    public static <V> V assertThat(WebDriver driver, ExpectedCondition<V> condition, int timeout) {
-        return new WebDriverWait(driver, timeout).until(condition);
+    public  <V> V assertThat(ExpectedCondition<V> condition, int timeout) {
+        return (new WebDriverWait(getWebDriver(), timeout)).until(condition);
     }
 
     public void open(WebDriver driver,String url) {
@@ -37,7 +38,7 @@ public abstract class ConciseAPI {
     }
 
     public static By byText(String text) {
-        return By.xpath(".//*/text()[normalize-space(.) = '" + text + "']/parent::*");
+        return By.xpath(".//*/text()[normalize-space(.) = " + text + "]/parent::*");
     }
 
     public static By byTitle(String text) {
