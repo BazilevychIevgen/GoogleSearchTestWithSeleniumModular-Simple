@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CustomConditions {
 
-    public static ExpectedCondition<WebElement> ElementHasText(final List<WebElement> elements, final int index, final String expectedText) {
+    public static ExpectedCondition<WebElement> elementHasText(final List<WebElement> elements, final int index, final String expectedText) {
         return elementExceptionsCatcher(new ExpectedCondition<WebElement>() {
             private String actualText;
 

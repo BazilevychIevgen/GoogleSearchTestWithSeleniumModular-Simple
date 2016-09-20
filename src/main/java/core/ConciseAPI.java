@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Quotes;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static core.BasePage.driver;
@@ -25,11 +26,11 @@ public abstract class ConciseAPI {
         return (new WebDriverWait(getWebDriver(), timeout)).until(condition);
     }
 
-    public void open(WebDriver driver,String url) {
+    public void open(String url) {
        driver.get(url);
     }
 
-    public WebElement $(WebDriver driver, By locator) {
+    public WebElement $(By locator) {
         return assertThat(visibilityOfElementLocated(locator));
     }
 
@@ -38,10 +39,10 @@ public abstract class ConciseAPI {
     }
 
     public static By byText(String text) {
-        return By.xpath(".//*/text()[normalize-space(.) = " + text + "]/parent::*");
+        return By.xpath(".//*/text()[normalize-space(.) = '" + text + "']/parent::*");
     }
 
     public static By byTitle(String text) {
-        return By.xpath(".//*[contains(@title, " + text + ")]");
+        return By.xpath(".//*[contains(@title, " + Quotes.escape(text) + ")]");
     }
 }

@@ -14,13 +14,11 @@ import static data.TestData.mailPassword;
  */
 public class GMailTest extends BaseTest {
 
-    private WebDriver driver = new FirefoxDriver();
-
     GMailPage page=new GMailPage(driver);
 
     @Before
     public void setUp() {
-        Configuration.timeout = 20;
+        Configuration.timeout = 30;
     }
 
     @Test

@@ -11,7 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-import static core.CustomConditions.ElementHasText;
+
+import static core.CustomConditions.elementHasText;
 import static core.CustomConditions.texts;
 import static org.junit.Assert.assertTrue;
 
@@ -28,43 +29,43 @@ public class GMailPage extends BasePage {
     }
 
     public  void send(String email, String subject) {
-        $(driver, By.name("to")).sendKeys(email);
-        $(driver, By.name("subjectbox")).sendKeys(subject);
-        $(driver, By.name("Send")).click();
+        $(By.name("to")).sendKeys(email);
+        $(By.name("subjectbox")).sendKeys(subject);
+        $(byText("Send")).click();
     }
 
     public  void login(String email,String password) {
-        $(driver, byCss("#Email")).sendKeys(email + Keys.ENTER);
-        $(driver, byCss("#Passwd")).sendKeys(password + Keys.ENTER);
+        $(byCss("#Email")).sendKeys(email + Keys.ENTER);
+        $(byCss("#Passwd")).sendKeys(password + Keys.ENTER);
     }
 
     public void openApp() {
-        open(driver,"http://gmail.com");
+        open("http://gmail.com");
     }
 
 
     public void search(String text) {
-        $(driver, By.name("q")).sendKeys("\"" + text + "\"" + Keys.ENTER);
+        $(By.name("q")).sendKeys("\"" + text + "\"" + Keys.ENTER);
     }
 
     public void composeEmail() {
-        $(driver, byText("COMPOSE")).click();
+        $(byText("COMPOSE")).click();
     }
 
     public void refresh() {
-        $(driver, byCss(".asf")).click();
+        $(byCss(".asf")).click();
     }
 
     public void goToSent() {
-        $(driver, byTitle("Sent Mail")).click();
+        $(byTitle("Sent Mail")).click();
     }
 
     public void goToInbox() {
-        $(driver, byTitle("Inbox")).click();
+        $(byTitle("Inbox")).click();
     }
 
     public   void assertMail(int index,String mailText) {
-    assertThat(ElementHasText(mails, index, mailText));
+    assertThat(elementHasText(mails, index, mailText));
     }
 
     public void assertMails(String ... mailTexts) {
