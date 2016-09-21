@@ -14,6 +14,7 @@ public class BaseTest extends ConciseAPI {
     public void tearDown() {
         driver.quit();
     }
+
     public WebDriver getWebDriver() {
         return driver;
     }

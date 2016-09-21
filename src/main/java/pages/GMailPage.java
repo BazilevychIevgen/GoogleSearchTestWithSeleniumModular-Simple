@@ -22,19 +22,19 @@ import static org.junit.Assert.assertTrue;
 public class GMailPage extends BasePage {
 
     @FindBy(css = "[role=main] .zA")
-    public static List<WebElement> mails ;
+    public static List<WebElement> mails;
 
     public GMailPage(WebDriver driver) {
         super(driver);
     }
 
-    public  void send(String email, String subject) {
+    public void send(String email, String subject) {
         $(By.name("to")).sendKeys(email);
         $(By.name("subjectbox")).sendKeys(subject);
         $(byText("Send")).click();
     }
 
-    public  void login(String email,String password) {
+    public void login(String email, String password) {
         $(byCss("#Email")).sendKeys(email + Keys.ENTER);
         $(byCss("#Passwd")).sendKeys(password + Keys.ENTER);
     }
@@ -42,7 +42,6 @@ public class GMailPage extends BasePage {
     public void openApp() {
         open("http://gmail.com");
     }
-
 
     public void search(String text) {
         $(By.name("q")).sendKeys("\"" + text + "\"" + Keys.ENTER);
@@ -64,12 +63,11 @@ public class GMailPage extends BasePage {
         $(byTitle("Inbox")).click();
     }
 
-    public   void assertMail(int index,String mailText) {
-    assertThat(elementHasText(mails, index, mailText));
+    public void assertMail(int index, String mailText) {
+        assertThat(elementHasText(mails, index, mailText));
     }
 
-    public void assertMails(String ... mailTexts) {
-    assertThat(texts(mails, mailTexts));
+    public void assertMails(String... mailTexts) {
+        assertThat(texts(mails, mailTexts));
     }
-
 }

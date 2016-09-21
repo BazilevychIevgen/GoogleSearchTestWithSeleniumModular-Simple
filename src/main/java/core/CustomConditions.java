@@ -57,7 +57,7 @@ public class CustomConditions {
 
             public String toString() {
                 return String.format("elements of list should have ('%s') texts, " +
-                        "while actual texts are ('%s')", elementsTexts.toArray().toString(), expectedTexts.toString());
+                        "while actual texts are ('%s')", elementsTexts.toString(), expectedTexts.toString());
             }
         });
     }

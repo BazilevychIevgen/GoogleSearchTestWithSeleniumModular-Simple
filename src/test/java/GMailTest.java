@@ -14,7 +14,7 @@ import static data.TestData.mailPassword;
  */
 public class GMailTest extends BaseTest {
 
-    GMailPage page=new GMailPage(driver);
+    GMailPage page = new GMailPage(driver);
 
     @Before
     public void setUp() {
@@ -22,20 +22,20 @@ public class GMailTest extends BaseTest {
     }
 
     @Test
-    public  void  testLoginSendReceiveAndSearch() {
+    public void testLoginSendReceiveAndSearch() {
         String emailSubject = "Hello,Ukraine " + System.currentTimeMillis();
 
         page.openApp();
-        page.login(mailLogin,mailPassword);
+        page.login(mailLogin, mailPassword);
 
         page.composeEmail();
         page.send(mailLogin, emailSubject);
 
         page.refresh();
-        page.assertMail(0,emailSubject);
+        page.assertMail(0, emailSubject);
 
         page.goToSent();
-        page.assertMail(0,emailSubject);
+        page.assertMail(0, emailSubject);
 
         page.goToInbox();
         page.search(emailSubject);

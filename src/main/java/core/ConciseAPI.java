@@ -18,16 +18,16 @@ public abstract class ConciseAPI {
 
     public abstract WebDriver getWebDriver();
 
-    public  <V> V assertThat( ExpectedCondition<V> condition) {
+    public <V> V assertThat(ExpectedCondition<V> condition) {
         return assertThat(condition, Configuration.timeout);
     }
 
-    public  <V> V assertThat(ExpectedCondition<V> condition, int timeout) {
+    public <V> V assertThat(ExpectedCondition<V> condition, int timeout) {
         return (new WebDriverWait(getWebDriver(), timeout)).until(condition);
     }
 
     public void open(String url) {
-       driver.get(url);
+        driver.get(url);
     }
 
     public WebElement $(By locator) {
