@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomConditions {
@@ -57,7 +58,7 @@ public class CustomConditions {
 
             public String toString() {
                 return String.format("elements of list should have ('%s') texts, " +
-                        "while actual texts are ('%s')", elementsTexts.toString(), expectedTexts.toString());
+                        "while actual texts are ('%s')", elementsTexts.toString(),  Arrays.toString(expectedTexts));
             }
         });
     }
