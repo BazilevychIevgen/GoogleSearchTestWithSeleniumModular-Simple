@@ -30,11 +30,11 @@ public abstract class ConciseAPI {
         driver.get(url);
     }
 
-    public WebElement $(By locator) {
+    public  WebElement $(By locator) {
         return assertThat(visibilityOfElementLocated(locator));
     }
 
-    public By byCss(String cssSelector) {
+    public static By byCss(String cssSelector) {
         return By.cssSelector(cssSelector);
     }
 

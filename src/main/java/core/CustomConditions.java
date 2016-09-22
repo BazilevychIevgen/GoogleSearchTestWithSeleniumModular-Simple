@@ -1,9 +1,6 @@
 package core;
 
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.ArrayList;
@@ -12,13 +9,13 @@ import java.util.List;
 
 public class CustomConditions {
 
-    public static ExpectedCondition<WebElement> elementHasText(final List<WebElement> elements, final int index, final String expectedText) {
+    public static ExpectedCondition<WebElement> elementHasText(final By elements, final int index, final String expectedText) {
         return elementExceptionsCatcher(new ExpectedCondition<WebElement>() {
             private String actualText;
 
             public WebElement apply(WebDriver driver) {
 
-                WebElement actualElement = elements.get(index);
+                WebElement actualElement =driver.findElements(elements).get(index);
                 actualText = actualElement.getText();
                 if (!actualText.contains(expectedText)) {
                     return null;
@@ -32,28 +29,29 @@ public class CustomConditions {
         });
     }
 
-    public static ExpectedCondition<List<WebElement>> texts(final List<WebElement> elements, final String... expectedTexts) {
+    public static ExpectedCondition<List<WebElement>> texts(final By elements, final String... expectedTexts) {
         return elementExceptionsCatcher(new ExpectedCondition<List<WebElement>>() {
             private List<String> elementsTexts;
 
             public List<WebElement> apply(WebDriver driver) {
 
                 elementsTexts = new ArrayList<>();
+                List<WebElement> innerElements = driver.findElements(elements);
 
-                for (int i = 0; i < elements.size(); i++) {
-                    elementsTexts.add(elements.get(i).getText());
+                for (int i = 0; i < innerElements.size(); i++) {
+                    elementsTexts.add(innerElements.get(i).getText());
                 }
 
-                if (elements.size() != expectedTexts.length) {
+                if (innerElements.size() != expectedTexts.length) {
                     return null;
                 }
 
-                for (int i = 0; i < elements.size(); i++) {
+                for (int i = 0; i < innerElements.size(); i++) {
                     if (!elementsTexts.get(i).contains(expectedTexts[i])) {
                         return null;
                     }
                 }
-                return elements;
+                return innerElements;
             }
 
             public String toString() {

@@ -21,8 +21,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class GMailPage extends BasePage {
 
-    @FindBy(css = "[role=main] .zA")
-    public static List<WebElement> mails;
+
+    By mails = byCss("[role=main] .zA");
 
     public GMailPage(WebDriver driver) {
         super(driver);
