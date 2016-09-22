@@ -14,8 +14,6 @@ public class BasePage extends ConciseAPI {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
-
     public static WebDriver driver;
 }
