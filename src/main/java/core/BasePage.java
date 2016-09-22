@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by barocko on 9/13/2016.
  */
-public class BasePage extends ConciseAPI {
+public class BasePage  {
 
     public WebDriver getWebDriver() {
         return driver;

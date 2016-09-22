@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 
+import static core.ConciseAPI.*;
 import static core.CustomConditions.elementHasText;
 import static core.CustomConditions.texts;
 import static org.junit.Assert.assertTrue;
@@ -19,55 +20,50 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by barocko on 9/13/2016.
  */
-public class GMailPage extends BasePage {
+public class GMailPage  {
 
+    public static By mails = byCss("[role=main] .zA");
 
-    By mails = byCss("[role=main] .zA");
-
-    public GMailPage(WebDriver driver) {
-        super(driver);
-    }
-
-    public void send(String email, String subject) {
+    public static void send(String email, String subject) {
         $(By.name("to")).sendKeys(email);
         $(By.name("subjectbox")).sendKeys(subject);
         $(byText("Send")).click();
     }
 
-    public void login(String email, String password) {
+    public static void login(String email, String password) {
         $(byCss("#Email")).sendKeys(email + Keys.ENTER);
         $(byCss("#Passwd")).sendKeys(password + Keys.ENTER);
     }
 
-    public void openApp() {
+    public static void openApp() {
         open("http://gmail.com");
     }
 
-    public void search(String text) {
+    public static void search(String text) {
         $(By.name("q")).sendKeys("\"" + text + "\"" + Keys.ENTER);
     }
 
-    public void composeEmail() {
+    public static void composeEmail() {
         $(byText("COMPOSE")).click();
     }
 
-    public void refresh() {
+    public static void refresh() {
         $(byCss(".asf")).click();
     }
 
-    public void goToSent() {
+    public static void goToSent() {
         $(byTitle("Sent Mail")).click();
     }
 
-    public void goToInbox() {
+    public static void goToInbox() {
         $(byTitle("Inbox")).click();
     }
 
-    public void assertMail(int index, String mailText) {
+    public static void assertMail(int index, String mailText) {
         assertThat(elementHasText(mails, index, mailText));
     }
 
-    public void assertMails(String... mailTexts) {
+    public static void assertMails(String... mailTexts) {
         assertThat(texts(mails, mailTexts));
     }
 }

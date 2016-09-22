@@ -7,14 +7,13 @@ import pages.GMailPage;
 
 import static data.TestData.mailLogin;
 import static data.TestData.mailPassword;
+import static pages.GMailPage.*;
 
 
 /**
  * Created by barocko on 9/13/2016.
  */
 public class GMailTest extends BaseTest {
-
-    GMailPage page = new GMailPage(driver);
 
     @Before
     public void setUp() {
@@ -25,21 +24,21 @@ public class GMailTest extends BaseTest {
     public void testLoginSendReceiveAndSearch() {
         String emailSubject = "Hello,Ukraine " + System.currentTimeMillis();
 
-        page.openApp();
-        page.login(mailLogin, mailPassword);
+        openApp();
+        login(mailLogin, mailPassword);
 
-        page.composeEmail();
-        page.send(mailLogin, emailSubject);
+        composeEmail();
+        send(mailLogin, emailSubject);
 
-        page.refresh();
-        page.assertMail(0, emailSubject);
+        refresh();
+        assertMail(0, emailSubject);
 
-        page.goToSent();
-        page.assertMail(0, emailSubject);
+        goToSent();
+        assertMail(0, emailSubject);
 
-        page.goToInbox();
-        page.search(emailSubject);
-        page.assertMails(emailSubject);
+        goToInbox();
+        search(emailSubject);
+        assertMails(emailSubject);
 
     }
 }

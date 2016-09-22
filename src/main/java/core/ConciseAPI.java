@@ -16,25 +16,33 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
  */
 public abstract class ConciseAPI {
 
-    public abstract WebDriver getWebDriver();
+    private static WebDriver driver;
 
-    public <V> V assertThat(ExpectedCondition<V> condition) {
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
+    public static void setDriver(WebDriver driver) {
+        ConciseAPI.driver = driver;
+    }
+
+    public static <V> V assertThat(ExpectedCondition<V> condition) {
         return assertThat(condition, Configuration.timeout);
     }
 
-    public <V> V assertThat(ExpectedCondition<V> condition, int timeout) {
-        return (new WebDriverWait(getWebDriver(), timeout)).until(condition);
+    public static  <V> V assertThat(ExpectedCondition<V> condition, int timeout) {
+        return new WebDriverWait(driver, timeout).until(condition);
     }
 
-    public void open(String url) {
-        driver.get(url);
+    public static void open(String url) {
+        getDriver().get(url);
     }
 
-    public  WebElement $(By locator) {
+    public static  WebElement $(By locator) {
         return assertThat(visibilityOfElementLocated(locator));
     }
 
-    public static By byCss(String cssSelector) {
+    public  static By byCss(String cssSelector) {
         return By.cssSelector(cssSelector);
     }
 
