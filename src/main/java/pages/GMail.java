@@ -1,15 +1,7 @@
 package pages;
 
-import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.List;
 
 
 import static core.ConciseAPI.*;
@@ -20,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by barocko on 9/13/2016.
  */
-public class GMailPage  {
+public class GMail{
 
     public static By mails = byCss("[role=main] .zA");
 

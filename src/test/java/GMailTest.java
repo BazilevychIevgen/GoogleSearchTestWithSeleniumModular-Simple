@@ -1,13 +1,10 @@
 import core.Configuration;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.GMailPage;
 
 import static data.TestData.mailLogin;
 import static data.TestData.mailPassword;
-import static pages.GMailPage.*;
+import static pages.GMail.*;
 
 
 /**

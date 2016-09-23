@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Quotes;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static core.BasePage.driver;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 /**
